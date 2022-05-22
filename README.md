@@ -22,6 +22,6 @@
 ensure interact-sound
 ensure rsg_treasure
 
-# Support : please state your purchase ID, date of purchase and version
+# Support
 - discord : https://discord.gg/s5uSk56B65
 - email : rexshackuk@gmail.com
