@@ -9,7 +9,6 @@
 
 # Dependancies
 - interact-sound : https://github.com/RexShack/interact-sound (must use this one)
-- rsg_notify : https://github.com/RexShack/rsg_notify
 
 # Installation
 - ensure that the dependancies (interact-sound and rsg_notify) are added and started
