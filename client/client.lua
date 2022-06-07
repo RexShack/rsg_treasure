@@ -101,7 +101,7 @@ AddEventHandler("rsg_treasure:clent:digging", function(chest)
 			if randomNumber > 90 then
 				TriggerServerEvent('QBCore:Server:RemoveItem', 'shovel', 1)
 				TriggerEvent('inventory:client:ItemBox', sharedItems['shovel'], 'remove')
-				exports['rsg_notify']:DisplayNotification('your shovel is broken', 5000)
+				exports['qbr-core']:Notify(9, 'your shovel is broken', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 			else
 				StartAnimation('script@mech@treasure_hunting@chest', 0, 'PBL_CHEST_01', 0, 1, true, 10000)
 				Wait(10000)
@@ -109,7 +109,7 @@ AddEventHandler("rsg_treasure:clent:digging", function(chest)
 				active = false
 			end
 		else
-			exports['rsg_notify']:DisplayNotification('You don\'t have a shovel!', 5000)
+			exports['qbr-core']:Notify(9, 'you don\'t have a shovel!', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 		end
 	end, { ['shovel'] = 1 })
 end)
