@@ -103,10 +103,20 @@ AddEventHandler("rsg_treasure:clent:digging", function(chest)
 				TriggerEvent('inventory:client:ItemBox', sharedItems['shovel'], 'remove')
 				exports['qbr-core']:Notify(9, 'your shovel is broken', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
 			else
+
+				local x,y,z = table.unpack(GetEntityCoords(PlayerPedId()))
+				local veg_radius = 1.0
+				local veg_Flags =  1 + 2 + 4 + 8 + 16 + 32 + 64 + 128 + 256   -- implement to all debris, grass, bush, etc...
+				local veg_ModType = 1 	-- 1 | VMT_Cull
+
+				veg_modifier_sphere = Citizen.InvokeNative(0xFA50F79257745E74,x,y,z, veg_radius, veg_ModType, veg_Flags, 0);   -- ADD_VEG_MODIFIER_SPHERE
+
 				StartAnimation('script@mech@treasure_hunting@chest', 0, 'PBL_CHEST_01', 0, 1, true, 10000)
 				Wait(10000)
 				TriggerServerEvent('rsg_treasure:server:givereward', chest)
 				active = false
+				Wait(10000)
+				Citizen.InvokeNative(0x9CF1836C03FB67A2,Citizen.PointerValueIntInitialized(veg_modifier_sphere), 0);    -- REMOVE_VEG_MODIFIER_SPHERE
 			end
 		else
 			exports['qbr-core']:Notify(9, 'you don\'t have a shovel!', 5000, 0, 'mp_lobby_textures', 'cross', 'COLOR_WHITE')
@@ -146,7 +156,9 @@ function StartAnimation(animDict,flags,playbackListName,p3,p4,groundZ,time)
 		else
 			Citizen.Wait(10000) 
 		end	    	
-		Citizen.InvokeNative(0x84EEDB2C6E650000, animScene) 
+		Citizen.InvokeNative(0x84EEDB2C6E650000, animScene)
+		Wait(10000)
+		DeleteEntity(chest)
    	end) 
 end
 
